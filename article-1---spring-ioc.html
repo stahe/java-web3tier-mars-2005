@@ -748,9 +748,10 @@
 <li>l&#x27;interface [IArticlesDao] pour la couche d&#x27;accès aux données</li>
 </ol>
 <ol start="2">
-  <li>l&#x27;interface [IArticlesManager] pour la couche métier</li>
-
+  <li>l&#x27;interface [IArticlesManager] pour la couche métier
+  </li>
 </ol>
+
 <p>Dans la couche d&#x27;accès aux données ou couche DAO (Data Access Object), il est fréquent de travailler avec un SGBD et donc avec un pilote JDBC. Considérons le squelette d&#x27;une classe accédant à une table d&#x27;articles dans un SGBD :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
@@ -804,16 +805,16 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>String driverClassName
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">le nom de la classe du pilote JDBC du SGBD</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">le nom de la classe du pilote JDBC du SGBD</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>String url
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">l&#x27;url JDBC de la base à utiliser</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">l&#x27;url JDBC de la base à utiliser</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>String user
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">l&#x27;identité sous laquelle on crée la connexion</p></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">l&#x27;identité sous laquelle on crée la connexion</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div markdown="block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>String pwd
 </code></pre></div>
-</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><p style="margin:0;">le mot de passe de cette identité</p></td></tr></table>
+</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><div style="margin:0 0 0.5em 0">le mot de passe de cette identité</div></td></tr></table>
 
 <p>Comment notre classe [ArticlesDaoPlainJdbc] précédente peut-elle obtenir ces informations ? Il y a diverses possibilités :</p>
 <p><strong>solution 1</strong> - les informations sont codées en dur dans la classe :</p>
@@ -998,16 +999,21 @@
 <a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">    </span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Ici, la classe d&#x27;appel [TestSpringArticlesPlainJdbc] n&#x27;a pas à connaître les informations nécessaires à l&#x27;initialisation du singleton à construire. Elle a simplement besoin de connaître :</p>
-<ol start="1">
-  <li>[springArticlesPlainJdbc.xml] : le nom du fichier de configuration Spring décrit plus haut</li>
-  <li>[articlesDao] : le nom du singleton à créer</li>
-
+<ol>
+  <li>[springArticlesPlainJdbc.xml] : le nom du fichier de configuration Spring décrit plus haut
+  </li>
+  <li>[articlesDao] : le nom du singleton à créer
+  </li>
 </ol>
+
 <p>Une modification du fichier de configuration, en-dehors de ces deux entités, n&#x27;a aucun impact sur le code Java. Cette méthode de configuration des objets d&#x27;une application est très souple. Pour se configurer, celle-ci n&#x27;a besoin de connaître que deux choses :</p>
 <ul>
-<li>le nom du fichier Spring qui contient la définition des singletons à construire</li>
-<li>les noms de ces singletons, ceux-ci servant au code Java pour obtenir une référence sur les objets auxquels ils ont été associés grâce au fichier de configuration</li>
+  <li>le nom du fichier Spring qui contient la définition des singletons à construire
+  </li>
+  <li>les noms de ces singletons, ceux-ci servant au code Java pour obtenir une référence sur les objets auxquels ils ont été associés grâce au fichier de configuration
+  </li>
 </ul>
+
 <h2 id="22-injection-de-dependance-et-inversion-de-controle">2.2. Injection de dépendance et Inversion de contrôle</h2>
 <p>Introduisons maintenant la notion <strong>d&#x27;injection de dépendance</strong> (Dependency Injection) utilisée par Spring pour configurer les applications. On utilise également le terme <strong>inversion de contrôle</strong> (IoC, Inversion of Control). Considérons la construction du singleton [ArticlesManagerWithDataBase] de la couche métier de notre application :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000005AA0000011FE2C73955.png" style="display:inline-block; margin:4px;width:17.997cm;height:3.561cm;" class="odt-zoomable" data-zoom-src="images/10000000000005AA0000011FE2C73955.png" /></td></tr></table>
@@ -1118,10 +1124,11 @@
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">        </span><span class="nt">&lt;/property&gt;</span>
 <a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="nt">&lt;/bean&gt;</span>
 </code></pre></div>
-<ol start="1">
-  <li>la classe implémentant le bean [articlesManager] est définie : [ArticlesManagerWithDataBase]</li>
-  <li>le champ [articlesDao] du bean reçoit une valeur par la balise <b>&lt;property name=&quot;articlesDao&quot;&gt;</b>. Il s&#x27;agit du champ défini dans la classe [ArticlesManagerWithDataBase] :</li>
-
+<ol>
+  <li>la classe implémentant le bean [articlesManager] est définie : [ArticlesManagerWithDataBase]
+  </li>
+  <li>le champ [articlesDao] du bean reçoit une valeur par la balise <b>&lt;property name=&quot;articlesDao&quot;&gt;</b>. Il s&#x27;agit du champ défini dans la classe [ArticlesManagerWithDataBase] :
+  </li>
 </ol>
 
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
@@ -1150,8 +1157,10 @@
 </code></pre></div></td></tr></table></div>
 <p>Pour que le champ [articlesDao] puisse être initialisé par Spring et sa balise &lt;property&gt;, il faut que le champ suive la norme JavaBean et qu&#x27;il existe une méthode [setArticlesDao] pour initialiser le champ [articlesDao]. On notera le nom de la méthode, dérivé de façon bien précise du nom du champ. De façon parallèle, il existe souvent une méthode [get...] pour obtenir la valeur du champ. Ici, c&#x27;est la méthode [getArticlesDao]. Dans cette nouvelle mouture, la classe [ArticlesManagerWithDataBase] <strong>n&#x27;a plus de constructeur</strong>. Elle n&#x27;en a plus besoin.</p>
 <ul>
-<li>la valeur qui sera affectée au champ [articlesDao] par Spring est celui du bean [articlesDao] défini dans son fichier de configuration :</li>
+  <li>la valeur qui sera affectée au champ [articlesDao] par Spring est celui du bean [articlesDao] défini dans son fichier de configuration :
+  </li>
 </ul>
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="w">    </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;articlesManager&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;istia.st.articles.domain.ArticlesManagerWithDataBase&quot;</span><span class="nt">&gt;</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;articlesDao&quot;</span><span class="nt">&gt;</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">            </span><span class="nt">&lt;ref</span><span class="w"> </span><span class="na">bean=</span><span class="s">&quot;articlesDao&quot;</span><span class="nt">/&gt;</span>
@@ -1164,13 +1173,18 @@
 <a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">    </span><span class="nt">&lt;/bean&gt;</span>
 </code></pre></div>
 <ul>
-<li>lorsque Spring construira le singleton [ArticlesManagerWithDataBase], il sera amené à créer également le singleton [ArticlesDaoPlainJdbc] :<ul>
-<li>Spring établira un graphe de dépendances des beans et verra que le bean [articlesManager] dépend du bean [articlesDao]</li>
-<li>il construira le bean [articlesDao], donc un objet de type [ArticlesDaoPlainJdbc]</li>
-<li>puis il construira le bean [articlesManager] de type [ArticlesManagerWithDataBase]</li>
+  <li>lorsque Spring construira le singleton [ArticlesManagerWithDataBase], il sera amené à créer également le singleton [ArticlesDaoPlainJdbc] :
+    <ul>
+      <li>Spring établira un graphe de dépendances des beans et verra que le bean [articlesManager] dépend du bean [articlesDao]
+      </li>
+      <li>il construira le bean [articlesDao], donc un objet de type [ArticlesDaoPlainJdbc]
+      </li>
+      <li>puis il construira le bean [articlesManager] de type [ArticlesManagerWithDataBase]
+      </li>
+    </ul>
+  </li>
 </ul>
-</li>
-</ul>
+
 <p>Imaginons maintenant un test JUnit pour la classe [ArticlesManagerWithDataBase]. Il pourrait ressembler à ce qui suit :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
@@ -1196,11 +1210,16 @@
 </code></pre></div></td></tr></table></div>
 <p>Suivons le déroulement de création des deux singletons définis dans le fichier Spring nommé [springArticlesManagerWithDataBase.xml]. </p>
 <ul>
-<li>la méthode [setUp] ci-dessus demande une référence du bean nommé [articlesManager]</li>
-<li>Spring consulte son fichier de configuration, trouve le bean [articlesManager]. S&#x27;il est déjà créé, il se contente de rendre une référence sur l&#x27;objet (singleton), sinon il le crée.</li>
-<li>Spring voit la dépendance du bean [articlesManager] vis à vis du bean [articlesDao]. Il crée donc le singleton [articlesDao] de type [ArticlesDaoPlainJdbc] si celui-ci n&#x27;est pas déjà créé (singleton).</li>
-<li>il créée le singleton [articlesManager] de type [ArticlesManagerWithDataBase]</li>
+  <li>la méthode [setUp] ci-dessus demande une référence du bean nommé [articlesManager]
+  </li>
+  <li>Spring consulte son fichier de configuration, trouve le bean [articlesManager]. S&#x27;il est déjà créé, il se contente de rendre une référence sur l&#x27;objet (singleton), sinon il le crée.
+  </li>
+  <li>Spring voit la dépendance du bean [articlesManager] vis à vis du bean [articlesDao]. Il crée donc le singleton [articlesDao] de type [ArticlesDaoPlainJdbc] si celui-ci n&#x27;est pas déjà créé (singleton).
+  </li>
+  <li>il créée le singleton [articlesManager] de type [ArticlesManagerWithDataBase]
+  </li>
 </ul>
+
 <p>Ce mécanisme pourrait être schématisé comme suit :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004C7000001DEC310E746.png" style="display:inline-block; margin:4px;width:16.18cm;height:6.324cm;" class="odt-zoomable" data-zoom-src="images/10000000000004C7000001DEC310E746.png" /></td></tr></table>
 
@@ -1320,11 +1339,16 @@
 </code></pre></div></td></tr></table></div>
 <p>La classe présente :</p>
 <ul>
-<li>deux champs privés <strong>nom</strong> et <strong>age</strong></li>
-<li>les méthodes de lecture (get) et d&#x27;écriture (set) de ces deux champs</li>
-<li>une méthode <strong>toString</strong> pour récupérer la valeur de l&#x27;objet [Personne] sous la forme d&#x27;une chaîne de caractères</li>
-<li>une méthode <strong>init</strong> qui sera appelée par Spring à la création de l&#x27;objet, une méthode <strong>close</strong> qui sera appelée à la destruction de l&#x27;objet</li>
+  <li>deux champs privés <b>nom</b> et <b>age</b>
+  </li>
+  <li>les méthodes de lecture (get) et d&#x27;écriture (set) de ces deux champs
+  </li>
+  <li>une méthode <b>toString</b> pour récupérer la valeur de l&#x27;objet [Personne] sous la forme d&#x27;une chaîne de caractères
+  </li>
+  <li>une méthode <b>init</b> qui sera appelée par Spring à la création de l&#x27;objet, une méthode <b>close</b> qui sera appelée à la destruction de l&#x27;objet
+  </li>
 </ul>
+
 <p>Pour créer des objets de type [Personne], nous utiliserons le fichier Spring suivant :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
@@ -1374,10 +1398,14 @@
 </code></pre></div></td></tr></table></div>
 <p>Ce fichier s&#x27;appellera <strong>config.xml</strong>.</p>
 <ul>
-<li>il définit deux beans de clés respectives &quot;personne1&quot; et &quot;personne2&quot; de type [Personne]</li>
-<li>il initialise les champs [nom, age] de chaque personne</li>
-<li>il définit les méthodes à appeler lors de la construction initiale de l&#x27;objet [init-method] et lors de la destruction de l&#x27;objet [destroy-method]</li>
+  <li>il définit deux beans de clés respectives &quot;personne1&quot; et &quot;personne2&quot; de type [Personne]
+  </li>
+  <li>il initialise les champs [nom, age] de chaque personne
+  </li>
+  <li>il définit les méthodes à appeler lors de la construction initiale de l&#x27;objet [init-method] et lors de la destruction de l&#x27;objet [destroy-method]
+  </li>
 </ul>
+
 <p>Pour nos tests, nous utiliserons une unique classe de test JUnit à laquelle nous ajouterons successivement des méthodes. La première version de cette classe sera la suivante :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
@@ -1437,23 +1465,40 @@
 </code></pre></div></td></tr></table></div>
 <p>Commentaires :</p>
 <ul>
-<li>pour obtenir les beans définis dans le fichier [config.xml], nous utilisons un objet de type [ListableBeanFactory]. Il existe d&#x27;autres types d&#x27;objets permettant d&#x27;accéder aux beans. L&#x27;objet [ListableBeanFactory] est obtenu dans la méthode [setUp] de la classe de test et mémorisé dans une variable privée. Il sera ainsi disponible pour toutes les méthodes de tests.</li>
-<li>le fichier [config.xml] sera placé dans le [ClassPath] de l&#x27;application, c.a.d. dans l&#x27;un des répertoires explorés par la machine virtuelle Java lorsqu&#x27;elle cherche une classe référencée par l&#x27;application. L&#x27;objet [ClassPathResource] sert à rechercher une ressource dans le [ClassPath] d&#x27;une application, ici le fichier [config.xml].</li>
-<li>Spring peut utiliser des fichiers de configuration ayant divers formats. L&#x27;objet [XmlBeanFactory] permet d&#x27;analyser un fichier de configuration au format XML.</li>
-<li>l&#x27;exploitation d&#x27;un fichier Spring donne un objet de type [ListableBeanFactory], ici l&#x27;objet <strong>bf</strong>. Avec cet objet, un bean identifié par la clé <strong>C</strong>, s&#x27;obtient par <strong>bf.getBean(C)</strong>.</li>
-<li>la méthode [test1] demande et affiche la valeur des beans de clé &quot;personne1&quot; et &quot;personne2&quot;.</li>
+  <li>pour obtenir les beans définis dans le fichier [config.xml], nous utilisons un objet de type [ListableBeanFactory]. Il existe d&#x27;autres types d&#x27;objets permettant d&#x27;accéder aux beans. L&#x27;objet [ListableBeanFactory] est obtenu dans la méthode [setUp] de la classe de test et mémorisé dans une variable privée. Il sera ainsi disponible pour toutes les méthodes de tests.
+  </li>
+  <li>le fichier [config.xml] sera placé dans le [ClassPath] de l&#x27;application, c.a.d. dans l&#x27;un des répertoires explorés par la machine virtuelle Java lorsqu&#x27;elle cherche une classe référencée par l&#x27;application. L&#x27;objet [ClassPathResource] sert à rechercher une ressource dans le [ClassPath] d&#x27;une application, ici le fichier [config.xml].
+  </li>
+  <li>Spring peut utiliser des fichiers de configuration ayant divers formats. L&#x27;objet [XmlBeanFactory] permet d&#x27;analyser un fichier de configuration au format XML.
+  </li>
+  <li>l&#x27;exploitation d&#x27;un fichier Spring donne un objet de type [ListableBeanFactory], ici l&#x27;objet <b>bf</b>. Avec cet objet, un bean identifié par la clé <b>C</b>, s&#x27;obtient par <b>bf.getBean(C)</b>.
+  </li>
+  <li>la méthode [test1] demande et affiche la valeur des beans de clé &quot;personne1&quot; et &quot;personne2&quot;.
+  </li>
 </ul>
+
 <p>La structure du projet Eclipse de notre application est la suivante :</p>
 <p><img src="images/10000000000000D5000000D01EFFD79D.png" style="width:5.636cm;height:5.502cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000000D5000000D01EFFD79D.png" /></p>
 <p>Commentaires :</p>
 <ul>
-<li>le dossier [src] contient les codes source. Les codes compilés iront dans un dossier [bin] non représenté ici.</li>
-<li>le fichier [config.xml] est à la racine du dossier [src]. La construction du projet le recopie automatiquement dans le dossier [bin], qui fait partie du [ClassPath] de l&#x27;application. C&#x27;est là qu&#x27;il est recherché par l&#x27;objet [ClassPathResource].</li>
-<li>le dossier [lib] contient trois bibliothèques Java nécessaires à l&#x27;application :
-        - <strong>commons-logging.jar</strong> et <strong>spring-core.jar</strong> pour les classes Spring
-        - <strong>junit.jar</strong> pour les classes JUnit</li>
-<li>le dossier [lib] fait partie, lui aussi, du [ClassPath] de l&#x27;application</li>
+  <li>le dossier [src] contient les codes source. Les codes compilés iront dans un dossier [bin] non représenté ici.
+  </li>
+  <li>le fichier [config.xml] est à la racine du dossier [src]. La construction du projet le recopie automatiquement dans le dossier [bin], qui fait partie du [ClassPath] de l&#x27;application. C&#x27;est là qu&#x27;il est recherché par l&#x27;objet [ClassPathResource].
+  </li>
+  <li>le dossier [lib] contient trois bibliothèques Java nécessaires à l&#x27;application :
+    <ol>
+        <ul>
+          <li><b>commons-logging.jar</b> et <b>spring-core.jar</b> pour les classes Spring
+          </li>
+          <li><b>junit.jar</b> pour les classes JUnit
+          </li>
+        </ul>
+    </ol>
+  </li>
+  <li>le dossier [lib] fait partie, lui aussi, du [ClassPath] de l&#x27;application
+  </li>
 </ul>
+
 <p>L&#x27;excécution de la méthode [test1] du test JUnit donne les résultats suivants :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
@@ -1479,30 +1524,41 @@
 </code></pre></div></td></tr></table></div>
 <p>Commentaires :</p>
 <ul>
-<li>Spring logue un certain nombre d&#x27;événements grâce à la bibliothèque [commons-logging.jar]. Ces logs nous permettent de mieux comprendre le fonctionnement de Spring.</li>
-<li>le fichier [config.xml] a été chargé puis exploité</li>
-<li>l&#x27;opération*</li>
+  <li>Spring logue un certain nombre d&#x27;événements grâce à la bibliothèque [commons-logging.jar]. Ces logs nous permettent de mieux comprendre le fonctionnement de Spring.
+  </li>
+  <li>le fichier [config.xml] a été chargé puis exploité
+  </li>
+  <li>l&#x27;opération*
+  </li>
 </ul>
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>Personne personne1 = (Personne) bf.getBean(&quot;personne1&quot;);
 </code></pre></div>
 <p>a forcé la création du bean [personne1]. On voit le log de Spring à ce sujet. Parce que dans la définition du bean [personne1] on avait écrit [init-method=&quot;init&quot;], la méthode [init] de l&#x27;objet [Personne] créé a été exécutée. Le message correspondant est affiché.</p>
 <ul>
-<li>L&#x27;opération</li>
+  <li>L&#x27;opération
+  </li>
 </ul>
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;personne1=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">personne1</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
 </code></pre></div>
 <p>a fait afficher la valeur de l&#x27;objet [Personne] créé.</p>
 <ul>
-<li>le même phénomène se répète pour le bean de clé [personne2].</li>
-<li>la dernière opération</li>
+  <li>le même phénomène se répète pour le bean de clé [personne2].
+  </li>
+  <li>la dernière opération
+  </li>
 </ul>
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="w">    </span><span class="n">personne2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Personne</span><span class="p">)</span><span class="w"> </span><span class="n">bf</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="s">&quot;personne2&quot;</span><span class="p">);</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;personne2=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">personne2</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
 </code></pre></div>
 <p>n&#x27;a pas provoqué la création d&#x27;un nouvel objet de type [Personne]. Si cela avait été le cas, on aurait eu l&#x27;affichage de la méthode [init], ce qui n&#x27;est pas le cas ici. C&#x27;est le principe du <strong>singleton</strong>. Spring, par défaut, ne crée qu&#x27;un seul exemplaire des beans de son fichier de configuration. C&#x27;est un service de références d&#x27;objet. Si on lui demande la référence d&#x27;un objet non encore créé, il le crée et en rend une référence. Si l&#x27;objet a déjà été créé, Spring se contente d&#x27;en donner une référence.</p>
 <ul>
-<li>on peut remarquer qu&#x27;on n&#x27;a nulle trace de la méthode [close] de l&#x27;objet [Personne] alors qu&#x27;on avait écrit dans la définition des beans [destroy-method=close]. Il est possible que cette méthode ne soit exécutée que lorsque la mémoire occupée par l&#x27;objet est récupérée par le ramasse-miettes (garbage collector). Au moment où cela se passe, l&#x27;application est déjà terminée et l&#x27;écriture à l&#x27;écran n&#x27;a aucun effet. A vérifier.</li>
+  <li>on peut remarquer qu&#x27;on n&#x27;a nulle trace de la méthode [close] de l&#x27;objet [Personne] alors qu&#x27;on avait écrit dans la définition des beans [destroy-method=close]. Il est possible que cette méthode ne soit exécutée que lorsque la mémoire occupée par l&#x27;objet est récupérée par le ramasse-miettes (garbage collector). Au moment où cela se passe, l&#x27;application est déjà terminée et l&#x27;écriture à l&#x27;écran n&#x27;a aucun effet. A vérifier.
+  </li>
 </ul>
+
 <p>Les bases d&#x27;une configuration Spring étant maintenant acquises, nous serons désormais un peu plus rapides dans nos explications.</p>
 <h3 id="232-exemple-2">2.3.2. Exemple 2</h3>
 <p>Considérons la nouvelle classe [Voiture] suivante :</p>
@@ -1626,10 +1682,14 @@
 </code></pre></div></td></tr></table></div>
 <p>La classe présente :</p>
 <ul>
-<li>trois champs privés <strong>type</strong>, <strong>marque</strong> et <strong>propriétaire</strong>. Ces champs peuvent être initialisés et lus par des méthodes publiques de beans <strong>get</strong> et <strong>set</strong>. Ils peuvent être également initialisés à l&#x27;aide du constructeur <strong>Voiture(String, String, Personne)</strong>. La classe possède également un constructeur sans arguments afin de suivre la norme JavaBean.</li>
-<li>une méthode <strong>toString</strong> pour récupérer la valeur de l&#x27;objet [Voiture] sous la forme d&#x27;une chaîne de caractères</li>
-<li>une méthode <strong>init</strong> qui sera appelée par Spring juste après la création de l&#x27;objet, une méthode <strong>close</strong> qui sera appelée à la destruction de l&#x27;objet</li>
+  <li>trois champs privés <b>type</b>, <b>marque</b> et <b>propriétaire</b>. Ces champs peuvent être initialisés et lus par des méthodes publiques de beans <b>get</b> et <b>set</b>. Ils peuvent être également initialisés à l&#x27;aide du constructeur <b>Voiture(String, String, Personne)</b>. La classe possède également un constructeur sans arguments afin de suivre la norme JavaBean.
+  </li>
+  <li>une méthode <b>toString</b> pour récupérer la valeur de l&#x27;objet [Voiture] sous la forme d&#x27;une chaîne de caractères
+  </li>
+  <li>une méthode <b>init</b> qui sera appelée par Spring juste après la création de l&#x27;objet, une méthode <b>close</b> qui sera appelée à la destruction de l&#x27;objet
+  </li>
 </ul>
+
 <p>Pour créer des objets de type [Voiture], nous utiliserons le fichier Spring [<strong>config.xml</strong>] suivant :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
@@ -1763,16 +1823,23 @@
 <a id="__codelineno-35-11" name="__codelineno-35-11"></a><span class="n">Voiture1</span><span class="o">=</span><span class="n">Voiture</span> <span class="p">:</span> <span class="n">marque</span><span class="o">=</span><span class="p">[</span><span class="n">Peugeot</span><span class="p">]</span> <span class="nb">type</span><span class="o">=</span><span class="p">[</span><span class="mi">307</span><span class="p">]</span> <span class="n">propriétaire</span><span class="o">=</span><span class="p">[</span><span class="n">nom</span><span class="o">=</span><span class="p">[</span><span class="n">Brigitte</span><span class="p">],</span> <span class="n">age</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">]]</span>
 </code></pre></div></td></tr></table></div>
 <p>Commentaires :</p>
-<ol start="1">
-  <li>la méthode [test2] demande une référence sur le bean [voiture1]</li>
-  <li>ligne 4 : Spring commence la création du bean [voiture1] car ce bean n&#x27;a pas encore été créé (singleton)</li>
-  <li>ligne 6 : parce que le bean [voiture1] référence le bean [personne2], ce dernier bean est construit à son tour</li>
-  <li>ligne 7 : le bean [personne2] a été créé. Sa méthode [init] est alors exécutée.</li>
-  <li>ligne 9 : Spring indique qu&#x27;il va utiliser un constructeur pour créer le bean [voiture1]</li>
-  <li>ligne 10 : le bean [voiture1] a été créé. Sa méthode [init] est alors exécutée.</li>
-  <li>ligne 11 : la méthode [test2] fait afficher la valeur du bean [voiture1]</li>
-
+<ol>
+  <li>la méthode [test2] demande une référence sur le bean [voiture1]
+  </li>
+  <li>ligne 4 : Spring commence la création du bean [voiture1] car ce bean n&#x27;a pas encore été créé (singleton)
+  </li>
+  <li>ligne 6 : parce que le bean [voiture1] référence le bean [personne2], ce dernier bean est construit à son tour
+  </li>
+  <li>ligne 7 : le bean [personne2] a été créé. Sa méthode [init] est alors exécutée.
+  </li>
+  <li>ligne 9 : Spring indique qu&#x27;il va utiliser un constructeur pour créer le bean [voiture1]
+  </li>
+  <li>ligne 10 : le bean [voiture1] a été créé. Sa méthode [init] est alors exécutée.
+  </li>
+  <li>ligne 11 : la méthode [test2] fait afficher la valeur du bean [voiture1]
+  </li>
 </ol>
+
 <h3 id="233-exemple-3">2.3.3. Exemple 3</h3>
 <p>Nous introduisons la nouvelle classe [GroupePersonnes] suivante :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
@@ -1904,11 +1971,13 @@
 <a id="__codelineno-37-18" name="__codelineno-37-18"></a><span class="w">        </span><span class="nt">&lt;/property&gt;</span>
 <a id="__codelineno-37-19" name="__codelineno-37-19"></a><span class="w">    </span><span class="nt">&lt;/bean&gt;</span>
 </code></pre></div></td></tr></table></div>
-<ol start="1">
-  <li>la balise &lt;<b>list</b>&gt; permet d&#x27;initialiser un champ de type tableau ou implémentant l&#x27;interface <b>List</b> avec différentes valeurs.</li>
-  <li>la balise &lt;<b>map</b>&gt; permet de faire la même chose avec un champ implémentant l&#x27;interface <b>Map</b></li>
-
+<ol>
+  <li>la balise &lt;<b>list</b>&gt; permet d&#x27;initialiser un champ de type tableau ou implémentant l&#x27;interface <b>List</b> avec différentes valeurs.
+  </li>
+  <li>la balise &lt;<b>map</b>&gt; permet de faire la même chose avec un champ implémentant l&#x27;interface <b>Map</b>
+  </li>
 </ol>
+
 <p>Pour nos tests, nous utiliserons la classe de test JUnit déjà présentée, en lui ajoutant la méthode [test3] suivante :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1">1</a></span>
 <span class="normal"><a href="#__codelineno-38-2">2</a></span>
@@ -1948,22 +2017,32 @@
 </code></pre></div></td></tr></table></div>
 <p>Commentaires :</p>
 <ul>
-<li>la méthode [test3] demande une référence du bean [groupe1]</li>
-<li>ligne 4 : Spring commence la création de ce bean</li>
-<li>parce que le bean [groupe1] référence les beans [personne1] et [personne2], ces deux beans sont créés (lignes 6 et 9) et leur méthode init exécutée (lignes 7 et 10)</li>
-<li>ligne 11 : le bean [groupe1] a été créé. Sa méthode [init] est maintenant exécutée.</li>
-<li>ligne 12 : affichage demandé par la méthode [test3].</li>
+  <li>la méthode [test3] demande une référence du bean [groupe1]
+  </li>
+  <li>ligne 4 : Spring commence la création de ce bean
+  </li>
+  <li>parce que le bean [groupe1] référence les beans [personne1] et [personne2], ces deux beans sont créés (lignes 6 et 9) et leur méthode init exécutée (lignes 7 et 10)
+  </li>
+  <li>ligne 11 : le bean [groupe1] a été créé. Sa méthode [init] est maintenant exécutée.
+  </li>
+  <li>ligne 12 : affichage demandé par la méthode [test3].
+  </li>
 </ul>
+
 <h2 id="24-spring-pour-configurer-les-applications-web-a-trois-couches">2.4. Spring pour configurer les applications web à trois couches</h2>
 <h3 id="241-architecture-generale-de-lapplication">2.4.1. Architecture générale de l&#x27;application</h3>
 <p>On souhaite construire une application 3-tier ayant la structure suivante :</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006400000010355E55B59.png" style="display:inline-block; margin:4px;width:17.997cm;height:2.914cm;" class="odt-zoomable" data-zoom-src="images/10000000000006400000010355E55B59.png" /></td></tr></table>
 
 <ul>
-<li>les trois couches seront rendues indépendantes grâce à l&#x27;utilisation d&#x27;interfaces Java</li>
-<li>l&#x27;intégration des trois couches sera réalisée par Spring</li>
-<li>on créera des paquetages séparés pour chacune des trois couches que l&#x27;on appellera <strong>Control</strong>, <strong>Domain</strong> et <strong>Dao</strong>. Un paquetage supplémentaire contiendra les applications de tests.</li>
+  <li>les trois couches seront rendues indépendantes grâce à l&#x27;utilisation d&#x27;interfaces Java
+  </li>
+  <li>l&#x27;intégration des trois couches sera réalisée par Spring
+  </li>
+  <li>on créera des paquetages séparés pour chacune des trois couches que l&#x27;on appellera <b>Control</b>, <b>Domain</b> et <b>Dao</b>. Un paquetage supplémentaire contiendra les applications de tests.
+  </li>
 </ul>
+
 <p>La structure de l&#x27;application sous Eclipse pourrait être la suivante :</p>
 <p><img src="images/10000000000000E8000001B51462EB46.png" style="width:6.137cm;height:11.561cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000000E8000001B51462EB46.png" /></p>
 <h3 id="242-la-couche-dao-dacces-aux-donnees">2.4.2. La couche DAO d&#x27;accès aux données</h3>
@@ -1975,9 +2054,12 @@
 <a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>écrire deux classes <strong>Dao1Impl1</strong> et <strong>Dao1Impl2</strong> implémentant l&#x27;interface <strong>IDao1</strong>. La méthode <strong>Dao1Impl1</strong>. <strong>doSomethingInDaoLayer</strong> rendra a+b et méthode <strong>Dao1Impl2</strong>. <strong>doSomethingInDaoLayer</strong> rendra a-b.</li>
-<li>écrire une classe de test JUnit testant les deux classes précédentes</li>
+  <li>écrire deux classes <b>Dao1Impl1</b> et <b>Dao1Impl2</b> implémentant l&#x27;interface <b>IDao1</b>. La méthode <b>Dao1Impl1</b>.<b> doSomethingInDaoLayer</b> rendra a+b et méthode <b>Dao1Impl2</b>.<b> doSomethingInDaoLayer</b> rendra a-b.
+  </li>
+  <li>écrire une classe de test JUnit testant les deux classes précédentes
+  </li>
 </ul>
+
 <h3 id="243-la-couche-metier">2.4.3. La couche métier</h3>
 <p>La couche métier implémentera l&#x27;interface suivante :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">istia.st.demo.domain</span><span class="p">;</span>
@@ -1987,9 +2069,12 @@
 <a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>écrire deux classes <strong>Domain1Impl1</strong> et <strong>Domain1Impl2</strong> implémentant l&#x27;interface <strong>IDomain1</strong>. Ces classes auront un constructeur recevant pour paramètre de type <strong>IDao1</strong>. La méthode <strong>Domain1Impl1.doSomethingInDomainLayer</strong> incrémentera a et b d&#x27;une unité puis passera ces deux paramètres à la méthode <strong>doSomethingInDaoLayer</strong> de l&#x27;objet de type <strong>IDao1</strong> reçu. La méthode <strong>Domain1Impl2.doSomethingInDomainLayer</strong> elle, décrémentera a et b d&#x27;une unité avant de faire la même chose.</li>
-<li>écrire une classe de test JUnit testant les deux classes précédentes</li>
+  <li>écrire deux classes <b>Domain1Impl1</b> et <b>Domain1Impl2</b> implémentant l&#x27;interface <b>IDomain1</b>. Ces classes auront un constructeur recevant pour paramètre de type <b>IDao1</b>. La méthode <b>Domain1Impl1.doSomethingInDomainLayer</b> incrémentera a et b d&#x27;une unité puis passera ces deux paramètres à la méthode <b>doSomethingInDaoLayer</b> de l&#x27;objet de type <b>IDao1</b> reçu. La méthode <b>Domain1Impl2.doSomethingInDomainLayer</b> elle, décrémentera a et b d&#x27;une unité avant de faire la même chose.
+  </li>
+  <li>écrire une classe de test JUnit testant les deux classes précédentes
+  </li>
 </ul>
+
 <h3 id="244-la-couche-interface-utilisateur">2.4.4. La couche interface utilisateur</h3>
 <p>La couche interface utilisateur implémentera l&#x27;interface suivante :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">istia.st.demo.control</span><span class="p">;</span>
@@ -1999,15 +2084,22 @@
 <a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a><span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>écrire deux classes <strong>Control1Impl1</strong> et <strong>Control1Impl2</strong> implémentant l&#x27;interface <strong>IControl1</strong>. Ces classes auront un constructeur recevant un paramètre de type <strong>IDomain1</strong>. La méthode <strong>Control1Impl1.doSomethingInControlLayer</strong> incrémentera a et b d&#x27;une unité puis passera ces deux paramètres à la méthode <strong>doSomethingInDomainLayer</strong> de l&#x27;objet de type <strong>IDomain1</strong> reçu. La méthode <strong>Control11Impl2.doSomethingInControlLayer</strong> elle, décrémentera a et b d&#x27;une unité avant de faire la même chose.</li>
-<li>écrire une classe de test JUnit testant les deux classes précédentes</li>
+  <li>écrire deux classes <b>Control1Impl1</b> et <b>Control1Impl2</b> implémentant l&#x27;interface <b>IControl1</b>. Ces classes auront un constructeur recevant un paramètre de type <b>IDomain1</b>. La méthode <b>Control1Impl1.doSomethingInControlLayer</b> incrémentera a et b d&#x27;une unité puis passera ces deux paramètres à la méthode <b>doSomethingInDomainLayer</b> de l&#x27;objet de type <b>IDomain1</b> reçu. La méthode <b>Control11Impl2.doSomethingInControlLayer</b> elle, décrémentera a et b d&#x27;une unité avant de faire la même chose.
+  </li>
+  <li>écrire une classe de test JUnit testant les deux classes précédentes
+  </li>
 </ul>
+
 <h3 id="245-integration-avec-spring">2.4.5. Intégration avec Spring</h3>
 <ul>
-<li>écrire un fichier de configuration Spring qui décidera quelles classes chacune des trois couches précédentes devra utiliser</li>
-<li>écrire une classe de test JUnit utilisant différentes configurations Spring, afin de mettre en lumière la flexibilité de l&#x27;application écrite</li>
-<li>écrire une application autonome (méthode main) donnant deux paramètres à l&#x27;interface <strong>IControl1</strong> et affichant le résultat rendu par l&#x27;interface.</li>
+  <li>écrire un fichier de configuration Spring qui décidera quelles classes chacune des trois couches précédentes devra utiliser
+  </li>
+  <li>écrire une classe de test JUnit utilisant différentes configurations Spring, afin de mettre en lumière la flexibilité de l&#x27;application écrite
+  </li>
+  <li>écrire une application autonome (méthode main) donnant deux paramètres à l&#x27;interface <b>IControl1</b> et affichant le résultat rendu par l&#x27;interface.
+  </li>
 </ul>
+
 <h3 id="246-une-solution">2.4.6. Une solution</h3>
 <h4 id="2461-le-projet-eclipse">2.4.6.1. Le projet Eclipse</h4>
 <p><img src="images/10000000000000D8000001AD27411C6F.png" style="width:5.713cm;height:11.349cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000000D8000001AD27411C6F.png" /></p>
@@ -2660,11 +2752,16 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000003F2000000C77329320D.png" style="display:inline-block; margin:4px;width:13.361cm;height:2.633cm;" class="odt-zoomable" data-zoom-src="images/10000000000003F2000000C77329320D.png" /></td></tr></table>
 
 <ul>
-<li>le filtre peut être exécuté avant ou après la méthode M cible, ou les deux.</li>
-<li>la méthode M ignore l&#x27;existence de ces filtres. Ceux-ci sont définis dans le fichier de configuration  de Spring.</li>
-<li>le code de la méthode M n&#x27;est pas modifié. Les filtres sont des classes Java à construire. Spring fournit des filtres prédéfinis, notamment pour gérer les transactions de SGBD.</li>
-<li>les filtres sont des beans et à ce titre sont définis dans le fichier de configuration de Spring en tant que beans.</li>
+  <li>le filtre peut être exécuté avant ou après la méthode M cible, ou les deux.
+  </li>
+  <li>la méthode M ignore l&#x27;existence de ces filtres. Ceux-ci sont définis dans le fichier de configuration  de Spring.
+  </li>
+  <li>le code de la méthode M n&#x27;est pas modifié. Les filtres sont des classes Java à construire. Spring fournit des filtres prédéfinis, notamment pour gérer les transactions de SGBD.
+  </li>
+  <li>les filtres sont des beans et à ce titre sont définis dans le fichier de configuration de Spring en tant que beans.
+  </li>
 </ul>
+
 <p>Un filtre courant est le filtre transactionnel. Prenons une méthode M de la couche métier réalisant deux opérations indissociables sur des données (unité de travail). Elle fait appel à deux méthodes M1 et M2 de la couche DAO pour réaliser ces deux opérations.</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000231000001018A4A6B06.png" style="display:inline-block; margin:4px;width:7.422cm;height:3.401cm;" class="odt-zoomable" data-zoom-src="images/1000000000000231000001018A4A6B06.png" /></td></tr></table>
 
@@ -2676,15 +2773,22 @@
 
 <p>Il y a plusieurs avantages à cette approche :</p>
 <ul>
-<li>une fois le filtre défini, il peut être appliqué à plusieurs méthodes, par exemple toutes celles qui ont besoin d&#x27;une transaction</li>
-<li>les méthodes ainsi filtrées n&#x27;ont pas à être réécrites</li>
-<li>les filtres à utiliser étant définis par configuration, on peut les changer</li>
+  <li>une fois le filtre défini, il peut être appliqué à plusieurs méthodes, par exemple toutes celles qui ont besoin d&#x27;une transaction
+  </li>
+  <li>les méthodes ainsi filtrées n&#x27;ont pas à être réécrites
+  </li>
+  <li>les filtres à utiliser étant définis par configuration, on peut les changer
+  </li>
 </ul>
+
 <p>En plus des concepts IoC et AOP, Spring amène de nombreuses classes support pour les applications à trois couches :</p>
 <ul>
-<li>pour Jdbc, SqlMap (Ibatis), Hibernate, JDO (Java Data Object) dans la couche DAO</li>
-<li>pour le modèle MVC dans la couche Interface Utilisateur</li>
+  <li>pour Jdbc, SqlMap (Ibatis), Hibernate, JDO (Java Data Object) dans la couche DAO
+  </li>
+  <li>pour le modèle MVC dans la couche Interface Utilisateur
+  </li>
 </ul>
+
 <p>Pour davantage d&#x27;informations : http://www.springframework.org.</p>
 
 

@@ -463,10 +463,14 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006F3000001EB3885D79F.png" style="display:inline-block; margin:4px;width:17.997cm;height:4.967cm;" class="odt-zoomable" data-zoom-src="images/10000000000006F3000001EB3885D79F.png" /></td></tr></table>
 
 <ul>
-<li>le modèle était acquis. Il a été utilisé de façon identique par les trois solutions proposées</li>
-<li>parce que l&#x27;indépendance des couches avait été scrupuleusement respectée, la couche [web] a pu être implémentée de trois façons différentes dans toucher au modèle. Nous n&#x27;avons travaillé que dans la seule couche [web].</li>
-<li>les solutions sont proches. Là où dans la première solution, on avait une servlet unique avec une méthode par action à traiter, dans les deux autres solutions, on a également une servlet unique mais débarrassée des méthodes de traitement des actions, traitement assuré désormais par des classes séparées. Le rôle de celles-ci était identique à celui des méthodes de la première solution.</li>
-<li>l&#x27;usage de [Spring] dans cette application nous laisse le choix des classes d&#x27;implémentation des interfaces Java des couches [domain] et [dao]. Ces classes d&#x27;implémentation pourraient être changées dans une  couche, sans aucun impact sur les autres couches. Seul le fichier de configuration de Spring serait à changer. Ainsi, la couche [dao] assurée ici par l&#x27;outil [sqlMap] pourrait être assurée par l&#x27;outil [Hibernate]. Cela impacterait la couche [dao] mais aucunement les couches [web] et [domain].</li>
+  <li>le modèle était acquis. Il a été utilisé de façon identique par les trois solutions proposées
+  </li>
+  <li>parce que l&#x27;indépendance des couches avait été scrupuleusement respectée, la couche [web] a pu être implémentée de trois façons différentes dans toucher au modèle. Nous n&#x27;avons travaillé que dans la seule couche [web].
+  </li>
+  <li>les solutions sont proches. Là où dans la première solution, on avait une servlet unique avec une méthode par action à traiter, dans les deux autres solutions, on a également une servlet unique mais débarrassée des méthodes de traitement des actions, traitement assuré désormais par des classes séparées. Le rôle de celles-ci était identique à celui des méthodes de la première solution.
+  </li>
+  <li>l&#x27;usage de [Spring] dans cette application nous laisse le choix des classes d&#x27;implémentation des interfaces Java des couches [domain] et [dao]. Ces classes d&#x27;implémentation pourraient être changées dans une  couche, sans aucun impact sur les autres couches. Seul le fichier de configuration de Spring serait à changer. Ainsi, la couche [dao] assurée ici par l&#x27;outil [sqlMap] pourrait être assurée par l&#x27;outil [Hibernate]. Cela impacterait la couche [dao] mais aucunement les couches [web] et [domain].
+  </li>
 </ul>
 
 
